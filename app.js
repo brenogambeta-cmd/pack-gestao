@@ -61,14 +61,27 @@ if(reduce){
  document.querySelectorAll('.story').forEach(function(el){cio.observe(el)});
 }
 
-/* ---- header, parallax e cta fixo ---- */
+/* ---- entrada dos bilhetes no mobile ---- */
+var mob=window.matchMedia('(max-width:900px)').matches;
+if(mob&&!reduce&&'IntersectionObserver' in window){
+ var nio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){nio.unobserve(e.target);e.target.classList.add('in')}})},{threshold:.2});
+ document.querySelectorAll('.note').forEach(function(n,i){n.style.setProperty('--nd',(i*0.09)+'s');nio.observe(n)});
+}else{document.querySelectorAll('.note').forEach(function(n){n.classList.add('in')})}
+
+/* ---- header, parallax, cta fixo e progresso de leitura ---- */
 var header=document.querySelector('header'),sticky=document.querySelector('.sticky'),bridge=document.querySelector('.bridge'),
-    notes=document.querySelectorAll('.note'),stack=document.querySelector('.modules .stack'),ticking=false,depths=[.05,.11,.07,.14];
+    notes=document.querySelectorAll('.note'),stack=document.querySelector('.modules .stack'),prog=document.getElementById('prog'),
+    ticking=false,depths=[.05,.11,.07,.14],d50=false,d90=false;
+function trackC(evt,params){if(pixelReady&&window.fbq){fbq('trackCustom',evt,params||{})}}
 function frame(){
  var y=window.pageYOffset||document.documentElement.scrollTop;
  if(header){header.classList.toggle('scrolled',y>24)}
+ var dh=document.documentElement.scrollHeight-innerHeight,pr=dh>0?Math.min(Math.max(y/dh,0),1):0;
+ if(prog){prog.style.transform='scaleX('+pr.toFixed(4)+')'}
+ if(pr>=.5&&!d50){d50=true;trackC('ScrollDepth50',{device:mob?'mobile':'desktop'})}
+ if(pr>=.9&&!d90){d90=true;trackC('ScrollDepth90',{device:mob?'mobile':'desktop'})}
  if(sticky&&bridge){sticky.classList.toggle('on',bridge.getBoundingClientRect().top<0)}
- if(!reduce){
+ if(!reduce&&!mob){
   if(y<1000){Array.prototype.forEach.call(notes,function(n,i){n.style.transform='translateY('+(-y*(depths[i]||.08)).toFixed(1)+'px)'})}
   if(stack){var r=stack.getBoundingClientRect();
    if(r.top<innerHeight&&r.bottom>0){var p=(innerHeight-r.top)/(innerHeight+r.height);stack.style.transform='translateY('+((0.5-p)*26).toFixed(1)+'px)'}}
