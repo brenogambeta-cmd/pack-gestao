@@ -273,3 +273,30 @@ footer p{margin:0;font-size:13.5px}
 .shot{margin:0 0 26px}
 .shot img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid rgba(255,255,255,.09)}
 .shot figcaption{font-size:13px;line-height:1.5;color:#8FA0B4;margin-top:10px}
+
+/* ---- mobile: movimento, toque e ergonomia ---- */
+.prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;background:var(--gold);transform:scaleX(0);transform-origin:left;will-change:transform;display:none}
+@media (max-width:900px){
+  .prog{display:block}
+  a,button,summary{-webkit-tap-highlight-color:transparent}
+  .btn{min-height:48px}
+  .btn:active{transform:scale(.975)}
+  .mod summary{padding:18px;min-height:60px}
+  .mod summary:active{background:#F7F9FB}
+  .faq summary{min-height:56px}
+  .faq summary:active{background:#F7F9FB}
+  .rv{transform:translateY(26px);transition-duration:.62s}
+  .note{opacity:0;transform:translateY(16px)!important;transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1);transition-delay:var(--nd,0s)}
+  .note.in{opacity:1;transform:none!important}
+  .shot img{transform:scale(.985);transition:transform .7s cubic-bezier(.22,.61,.36,1)}
+  .rv.in .shot img{transform:none}
+  .sticky.on{box-shadow:0 -8px 24px rgba(18,35,58,.10)}
+  .metrics>div,.friction>div,.steps>div{transition:transform .18s ease}
+  .metrics>div:active,.friction>div:active{transform:scale(.99)}
+  footer .shell a{padding:6px 0;display:inline-block}
+}
+@media (prefers-reduced-motion:reduce){
+  .prog{display:none}
+  .note{opacity:1!important;transform:none!important;transition:none}
+  .shot img{transform:none!important;transition:none}
+}
