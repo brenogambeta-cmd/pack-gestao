@@ -18,8 +18,9 @@ function track(evt,params){if(pixelReady&&window.fbq){fbq('track',evt,params||{}
 
 var cc=document.getElementById('cc'),K='pg_consent',v=null;
 try{v=localStorage.getItem(K)}catch(e){}
-function setConsent(val){try{localStorage.setItem(K,val)}catch(e){}if(cc){cc.classList.remove('show')}if(val==='all'){loadPixels()}}
-if(v==='all'){loadPixels()}else if(v!=='min'&&cc){setTimeout(function(){cc.classList.add('show')},1600)}
+function setConsent(val){try{localStorage.setItem(K,val)}catch(e){}if(cc){cc.classList.remove('show')}if(val==='all'){loadPixels()}else if(window.fbq){fbq('consent','revoke')}}
+if(v!=='min'){loadPixels()}
+if(!v&&cc){setTimeout(function(){cc.classList.add('show')},1600)}
 var ok=document.getElementById('ccOk'),no=document.getElementById('ccNo');
 if(ok){ok.onclick=function(){setConsent('all')}}
 if(no){no.onclick=function(){setConsent('min')}}
