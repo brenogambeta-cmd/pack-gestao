@@ -269,3 +269,7 @@ footer p{margin:0;font-size:13.5px}
   .board .pin{display:none}
   .pull{padding-left:18px;margin:24px 0}
 }
+
+.shot{margin:0 0 26px}
+.shot img{width:100%;height:auto;display:block;border-radius:10px;border:1px solid rgba(255,255,255,.09)}
+.shot figcaption{font-size:13px;line-height:1.5;color:#8FA0B4;margin-top:10px}
