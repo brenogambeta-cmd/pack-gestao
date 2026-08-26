@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://brenogambeta-cmd.github.io/pack-gestao/sitemap.xml
+Sitemap: https://pack-gestao.vercel.app/sitemap.xml
