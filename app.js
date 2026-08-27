@@ -13,8 +13,21 @@ function loadPixels(){
  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
  fbq('init',PIXEL_ID);
  fbq('track','PageView');
+ loadUtmify();
 }
 function track(evt,params){if(pixelReady&&window.fbq){fbq('track',evt,params||{})}}
+
+/* ---- UTMify: captura de UTMs e repasse ao checkout, mesmo gate de consentimento ---- */
+var utmifyReady=false;
+function loadUtmify(){
+ if(utmifyReady)return; utmifyReady=true;
+ var s=document.createElement('script');
+ s.src='https://cdn.utmify.com.br/scripts/utms/latest.js';
+ s.async=true; s.defer=true;
+ s.setAttribute('data-utmify-prevent-xcod-sck','');
+ s.setAttribute('data-utmify-prevent-subids','');
+ (document.head||document.documentElement).appendChild(s);
+}
 
 var cc=document.getElementById('cc'),K='pg_consent',v=null;
 try{v=localStorage.getItem(K)}catch(e){}
