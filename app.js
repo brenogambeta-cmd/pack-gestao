@@ -13,12 +13,10 @@ function loadPixels(){
  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
  fbq('init',PIXEL_ID);
  fbq('track','PageView');
- loadUtmify();
- loadUtmifyPixel();
 }
 function track(evt,params){if(pixelReady&&window.fbq){fbq('track',evt,params||{})}}
 
-/* ---- UTMify: captura de UTMs e repasse ao checkout, mesmo gate de consentimento ---- */
+/* ---- UTMify: captura de UTMs e repasse ao checkout ---- */
 var utmifyReady=false;
 function loadUtmify(){
  if(utmifyReady)return; utmifyReady=true;
@@ -40,6 +38,10 @@ function loadUtmifyPixel(){
  s.async=true; s.defer=true;
  (document.head||document.documentElement).appendChild(s);
 }
+
+/* UTMify carrega sempre: precisa capturar a UTM no primeiro instante */
+loadUtmify();
+loadUtmifyPixel();
 
 var cc=document.getElementById('cc'),K='pg_consent',v=null;
 try{v=localStorage.getItem(K)}catch(e){}
