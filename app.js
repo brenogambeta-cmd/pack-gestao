@@ -14,6 +14,7 @@ function loadPixels(){
  fbq('init',PIXEL_ID);
  fbq('track','PageView');
  loadUtmify();
+ loadUtmifyPixel();
 }
 function track(evt,params){if(pixelReady&&window.fbq){fbq('track',evt,params||{})}}
 
@@ -26,6 +27,17 @@ function loadUtmify(){
  s.async=true; s.defer=true;
  s.setAttribute('data-utmify-prevent-xcod-sck','');
  s.setAttribute('data-utmify-prevent-subids','');
+ (document.head||document.documentElement).appendChild(s);
+}
+
+/* ---- Pixel da UTMify ---- */
+var utmifyPixelReady=false;
+function loadUtmifyPixel(){
+ if(utmifyPixelReady)return; utmifyPixelReady=true;
+ window.pixelId='6a905f1d21306a5dec37f5b6';
+ var s=document.createElement('script');
+ s.src='https://cdn.utmify.com.br/scripts/pixel/pixel.js';
+ s.async=true; s.defer=true;
  (document.head||document.documentElement).appendChild(s);
 }
 
