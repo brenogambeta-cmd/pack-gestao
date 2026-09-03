@@ -55,7 +55,7 @@ if(no){no.onclick=function(){setConsent('min')}}
 /* clique em qualquer CTA que leve ao checkout */
 document.querySelectorAll('a[href*="pay.kiwify.com.br"]').forEach(function(a){
  a.addEventListener('click',function(){
-  trackC('ClickCheckout',{content_name:'Pack de Gestao',value:67,currency:'BRL',source:a.getAttribute('data-cta')||'link'});
+  trackC('ClickCheckout',{content_name:'Pack de Gestao',value:27.90,currency:'BRL',source:a.getAttribute('data-cta')||'link'});
  });
 });
 /* chegou na secao da oferta */
